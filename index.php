@@ -4,17 +4,17 @@
     if(isset($_POST['submit'])){
         $fname=$_POST['fname'];
         $lname=$_POST['lname'];
-        $email=$_POST['email'];
-        $mobile=$_POST['mobile'];
+        $major=$_POST['major'];
+        $GPA=$_POST['GPA'];
 
         // Check if any of the required fields are empty
-        if(empty($fname) || empty($lname) || empty($email) || empty($mobile)){
+        if(empty($fname) || empty($lname) || empty($major) || empty($GPA)){
             // Display an error message if any of the required fields are empty
             $error_message = "Please fill in all required fields.";
         } else {
             //insert query
-            $sql = "INSERT INTO owners (fname, lname, email, mobile) 
-            VALUES ('$fname', '$lname', '$email', '$mobile')";
+            $sql = "INSERT INTO owners (fname, lname, major, GPA) 
+            VALUES ('$fname', '$lname', '$major', '$GPA')";
 
             $result=mysqli_query($con,$sql);
             if(!$result){
@@ -62,14 +62,14 @@
             name="lname" autocomplete="off" style="width: 400px">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput4" class="form-label">Email</label>
-            <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter email" 
-            name="email" autocomplete="off" style="width: 400px">
+            <label for="exampleFormControlInput4" class="form-label">major</label>
+            <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter major" 
+            name="major" autocomplete="off" style="width: 400px">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput5" class="form-label">Mobile</label>
-            <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Enter mobile" 
-            name="mobile" autocomplete="off" style="width: 400px">
+            <label for="exampleFormControlInput5" class="form-label">GPA</label>
+            <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Enter GPA" 
+            name="GPA" autocomplete="off" style="width: 400px">
         </div>
         <button class="btn btn-primary btn-lg my-5" 
         name="submit">Submit</button>
