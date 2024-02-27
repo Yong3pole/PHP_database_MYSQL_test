@@ -71,9 +71,9 @@
             <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Enter mobile" 
             name="mobile" autocomplete="off" style="width: 400px">
         </div>
-        <button class="btn btn-dark btn-lg my-5" 
+        <button class="btn btn-primary btn-lg my-5" 
         name="submit">Submit</button>
-            </br><button class="btn btn-dark btn-lg" 
+        </br><button class="btn btn-dark btn-lg" 
         name="view_all">View All</button>
         </form>
     </div>
