@@ -45,8 +45,8 @@
                     <th scope="col">ID#</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Mobile</th>
+                    <th scope="col">major</th>
+                    <th scope="col">GPA</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -62,14 +62,14 @@
                     $ID = $row['ID'];
                     $fname = $row['fname'];
                     $lname = $row['lname'];
-                    $email = $row['email'];
-                    $mobile = $row['mobile'];
+                    $major = $row['major'];
+                    $GPA = $row['GPA'];
                     echo '<tr>
                     <th scope="row">' . $ID . '</th>
                     <td>' . $fname . '</td>
                     <td>' . $lname . '</td>
-                    <td>' . $email . '</td>
-                    <td>' . $mobile . '</td>
+                    <td>' . $major . '</td>
+                    <td>' . $GPA . '</td>
                     <td>
                     <a href="update.php?updateid='.$ID.'" class="btn btn-primary btn-sm">Update</a>
                     <a href="read.php?deleteid='.$ID.'" class="btn btn-danger btn-sm">Delete</a>
