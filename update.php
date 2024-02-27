@@ -20,8 +20,8 @@
     if ($row = mysqli_fetch_assoc($result)) {
         $fname = $row['fname'];
         $lname = $row['lname'];
-        $email = $row['email'];
-        $mobile = $row['mobile'];
+        $major = $row['major'];
+        $GPA = $row['GPA'];
     } else {
         echo "Owner not found.";
         exit;
@@ -31,12 +31,12 @@
     if (isset($_POST['update'])) {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
-        $email = $_POST['email'];
-        $mobile = $_POST['mobile'];
+        $major = $_POST['major'];
+        $GPA = $_POST['GPA'];
 
         // Update the owner with the new details
-        $stmt = mysqli_prepare($con, "UPDATE owners SET fname=?, lname=?, email=?, mobile=? WHERE ID=?");
-        mysqli_stmt_bind_param($stmt, "ssssi", $fname, $lname, $email, $mobile, $ID);
+        $stmt = mysqli_prepare($con, "UPDATE owners SET fname=?, lname=?, major=?, GPA=? WHERE ID=?");
+        mysqli_stmt_bind_param($stmt, "ssssi", $fname, $lname, $major, $GPA, $ID);
         mysqli_stmt_execute($stmt);
 
         if (mysqli_stmt_affected_rows($stmt) > 0) {
@@ -61,23 +61,23 @@
 <body>
     
     <div class="container my-5">
-        <h1>Update Owner</h1>
+        <h1>Update Info</h1>
         <form method="post">
             <div class="form-group mb-3 my-5">
-                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                <label for="exampleInputmajor1" class="form-label">First Name</label>
                 <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="fname" value="<?php echo htmlspecialchars($fname); ?>">
             </div>
             <div class="form-group mb-3">
-                <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                <label for="exampleInputmajor1" class="form-label">Last Name</label>
                 <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="lname" value="<?php echo htmlspecialchars($lname); ?>">
             </div>
             <div class="form-group mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="email" value="<?php echo htmlspecialchars($email); ?>">
+                <label for="exampleInputmajor1" class="form-label">major</label>
+                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="major" value="<?php echo htmlspecialchars($major); ?>">
             </div>
             <div class="form-group mb-3">
-                <label for="exampleInputEmail1" class="form-label">Mobile</label>
-                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="mobile" value="<?php echo htmlspecialchars($mobile); ?>">
+                <label for="exampleInputmajor1" class="form-label">GPA</label>
+                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="GPA" value="<?php echo htmlspecialchars($GPA); ?>">
             </div>
 
             <button type="submit" name="update" class="btn btn-primary">Update</button>
