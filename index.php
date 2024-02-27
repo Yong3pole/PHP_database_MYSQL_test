@@ -1,30 +1,34 @@
 <?php
-include 'connect.php'; //connect to database, error when fails
+    include 'connect.php'; //connect to database, error when fails
 
-if(isset($_POST['submit'])){
-    $fname=$_POST['fname'];
-    $lname=$_POST['lname'];
-    $email=$_POST['email'];
-    $mobile=$_POST['mobile'];
+    if(isset($_POST['submit'])){
+        $fname=$_POST['fname'];
+        $lname=$_POST['lname'];
+        $email=$_POST['email'];
+        $mobile=$_POST['mobile'];
 
-    // Check if any of the required fields are empty
-    if(empty($fname) || empty($lname) || empty($email) || empty($mobile)){
-        // Display an error message if any of the required fields are empty
-        $error_message = "Please fill in all required fields.";
-    } else {
-        //insert query
-        $sql = "INSERT INTO owners (fname, lname, email, mobile) 
-        VALUES ('$fname', '$lname', '$email', '$mobile')";
+        // Check if any of the required fields are empty
+        if(empty($fname) || empty($lname) || empty($email) || empty($mobile)){
+            // Display an error message if any of the required fields are empty
+            $error_message = "Please fill in all required fields.";
+        } else {
+            //insert query
+            $sql = "INSERT INTO owners (fname, lname, email, mobile) 
+            VALUES ('$fname', '$lname', '$email', '$mobile')";
 
-        $result=mysqli_query($con,$sql);
-        if(!$result){
-            die(mysqli_error($con));
-        }
-        else{
-            $success_message = "Records Added";
+            $result=mysqli_query($con,$sql);
+            if(!$result){
+                die(mysqli_error($con));
+            }
+            else{
+                $success_message = "Records Added";
+            }
         }
     }
-}
+
+    if(isset($_POST['view_all'])){
+        header('location:read.php');
+    }
 ?>
 
 <!doctype html>
@@ -69,6 +73,8 @@ if(isset($_POST['submit'])){
         </div>
         <button class="btn btn-dark btn-lg my-5" 
         name="submit">Submit</button>
+            </br><button class="btn btn-dark btn-lg" 
+        name="view_all">View All</button>
         </form>
     </div>
 </body>
