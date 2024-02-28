@@ -66,15 +66,16 @@
             <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter major" 
             name="major" autocomplete="off" style="width: 400px">
         </div>
-        <div class="mb-3">
+        <div class="">
             <label for="exampleFormControlInput5" class="form-label">GPA</label>
             <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Enter GPA" 
             name="GPA" autocomplete="off" style="width: 400px">
         </div>
         <button class="btn btn-primary btn-lg my-5" 
-        name="submit">Submit</button>
+        name="submit">Create Record</button>
         </br><button class="btn btn-dark btn-lg" 
-        name="view_all">View All</button>
+        name="view_all">View All Records</button>
+        <a href="dashboard.php" class="btn btn-dark btn-lg">Exit to Dashboard</a>
         </form>
     </div>
 </body>
