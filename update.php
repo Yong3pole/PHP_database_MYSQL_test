@@ -18,10 +18,10 @@
 
     // Fetch the owner details
     if ($row = mysqli_fetch_assoc($result)) {
-        $fname = $row['fname'];
-        $lname = $row['lname'];
-        $major = $row['major'];
-        $GPA = $row['GPA'];
+        $cname = $row['cname'];
+        $phone = $row['phone'];
+        $address = $row['address'];
+
     } else {
         echo "Owner not found.";
         exit;
@@ -29,18 +29,19 @@
 
     // Handle form submission
     if (isset($_POST['update'])) {
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $major = $_POST['major'];
-        $GPA = $_POST['GPA'];
+        $cname = $_POST['cname'];
+        $phone = $_POST['phone'];
+        $address = $_POST['address'];
 
         // Update the owner with the new details
-        $stmt = mysqli_prepare($con, "UPDATE owners SET fname=?, lname=?, major=?, GPA=? WHERE ID=?");
-        mysqli_stmt_bind_param($stmt, "ssssi", $fname, $lname, $major, $GPA, $ID);
+        $stmt = mysqli_prepare($con, "UPDATE owners SET cname=?, phone=?, address=? WHERE ID=?");
+        mysqli_stmt_bind_param($stmt, "sssi", $cname, $phone, $address, $ID);
+
         mysqli_stmt_execute($stmt);
 
         if (mysqli_stmt_affected_rows($stmt) > 0) {
-            echo "Record updated successfully!";
+            $success_message = "Records Updated";
+            echo '<div class="alert alert-success">'.$success_message.'</div>';
         } else {
             echo "Error updating record: " . mysqli_error($con);
         }
@@ -64,21 +65,18 @@
         <h1>Update Info</h1>
         <form method="post">
             <div class="form-group mb-3 my-5">
-                <label for="exampleInputmajor1" class="form-label">First Name</label>
-                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="fname" value="<?php echo htmlspecialchars($fname); ?>">
+                <label for="exampleInputaddress1" class="form-label">First Name</label>
+                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="cname" value="<?php echo htmlspecialchars($cname); ?>">
             </div>
             <div class="form-group mb-3">
-                <label for="exampleInputmajor1" class="form-label">Last Name</label>
-                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="lname" value="<?php echo htmlspecialchars($lname); ?>">
+                <label for="exampleInputaddress1" class="form-label">Last Name</label>
+                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="phone" value="<?php echo htmlspecialchars($phone); ?>">
             </div>
             <div class="form-group mb-3">
-                <label for="exampleInputmajor1" class="form-label">major</label>
-                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="major" value="<?php echo htmlspecialchars($major); ?>">
+                <label for="exampleInputaddress1" class="form-label">address</label>
+                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="address" value="<?php echo htmlspecialchars($address); ?>">
             </div>
-            <div class="form-group mb-3">
-                <label for="exampleInputmajor1" class="form-label">GPA</label>
-                <input type="text" class="form-control" style="width: 400px" autocomplete="off" name="GPA" value="<?php echo htmlspecialchars($GPA); ?>">
-            </div>
+            
 
             <button type="submit" name="update" class="btn btn-primary">Update</button>
             <a href="read.php" class="btn btn-secondary">Go Back</a>
