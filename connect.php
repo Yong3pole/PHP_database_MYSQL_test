@@ -3,6 +3,4 @@
     if(!$con){
         die(mysqli_error("Error"+$con));
     }
-    
-
 ?>
