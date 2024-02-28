@@ -1,3 +1,7 @@
+Database name ‘clinic’
+Tables: ‘owners’, ‘animals’
+
+
 -------------- So FAR WORKING (ISET SA MYSQL DAAN)--------------------
 
 Table: owners
@@ -7,7 +11,7 @@ cname
 phone
 address
   
-Table: Animals
+Table: animals
 Fields:
 AnimalID (Primary Key)
 AnimalName
@@ -39,3 +43,4 @@ AppointmentID (Foreign Key referencing Appointments.AppointmentID)
 ProcedureID (Foreign Key referencing Procedures.ProcedureID)
 InvoiceDate
 TotalCost
+
