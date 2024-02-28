@@ -1,0 +1,36 @@
+Table: Owners
+Fields:
+OwnerID (Primary Key)
+OwnerName
+Phone
+Email
+Address
+  
+Table: Animals
+Fields:
+AnimalID (Primary Key)
+AnimalName
+AnimalType
+Age
+OwnerID (Foreign Key referencing Owners.OwnerID)
+
+Table: Appointments
+Fields:
+AppointmentID (Primary Key)
+AnimalID (Foreign Key referencing Animals.AnimalID)
+AppointmentDate
+Reason
+
+Table: Procedures
+Fields:
+ProcedureID (Primary Key)
+ProcedureName
+ProcedureCost
+
+Table: Invoices
+Fields:
+InvoiceID (Primary Key)
+AppointmentID (Foreign Key referencing Appointments.AppointmentID)
+ProcedureID (Foreign Key referencing Procedures.ProcedureID)
+InvoiceDate
+TotalCost
