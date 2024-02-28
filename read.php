@@ -1,13 +1,13 @@
 <?php
     include 'connect.php';
 
-    // Check if ID is set and is valid
+    // Check if OwnerID is set and is valid
     if (isset($_GET['deleteid'])) {
-        $ID = filter_var($_GET['deleteid'], FILTER_SANITIZE_NUMBER_INT);
+        $OwnerID = filter_var($_GET['deleteid'], FILTER_SANITIZE_NUMBER_INT);
 
-        // Delete the owner with the given ID
-        $stmt = mysqli_prepare($con, "DELETE FROM owners WHERE ID = ?");
-        mysqli_stmt_bind_param($stmt, "i", $ID);
+        // Delete the owner with the given OwnerID
+        $stmt = mysqli_prepare($con, "DELETE FROM owners WHERE OwnerID = ?");
+        mysqli_stmt_bind_param($stmt, "i", $OwnerID);
         mysqli_stmt_execute($stmt);
 
         if (mysqli_stmt_affected_rows($stmt) > 0) {
@@ -42,7 +42,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID#</th>
+                    <th scope="col">OwnerID#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
@@ -58,18 +58,19 @@
 
                 while ($row = mysqli_fetch_assoc($result)) {
 
-                    $ID = $row['ID'];
+                    $OwnerID = $row['OwnerID'];
                     $cname = $row['cname'];
                     $phone = $row['phone'];
                     $address = $row['address'];
                     echo '<tr>
-                    <th scope="row">' . $ID . '</th>
+                    <th scope="row">' . $OwnerID . '</th>
                     <td>' . $cname . '</td>
                     <td>' . $phone . '</td>
                     <td>' . $address . '</td>
                     <td>
-                    <a href="update.php?updateid='.$ID.'" class="btn btn-primary btn-sm">Update</a>
-                    <a href="read.php?deleteid='.$ID.'" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="animals.php?ownerid='.$OwnerID.'" class="btn btn-success btn-sm">Pet Records</a>
+                    <a href="update.php?updateid='.$OwnerID.'" class="btn btn-primary btn-sm">Update</a>
+                    <a href="read.php?deleteid='.$OwnerID.'" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>';
                 }
