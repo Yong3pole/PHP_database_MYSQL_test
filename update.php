@@ -8,11 +8,11 @@
     }
 
     // Sanitize the input
-    $ID = filter_var($_GET['updateid'], FILTER_SANITIZE_NUMBER_INT);
+    $OwnerID = filter_var($_GET['updateid'], FILTER_SANITIZE_NUMBER_INT);
 
     // Select the owner with the given ID
-    $stmt = mysqli_prepare($con, "SELECT * FROM owners WHERE ID = ?");
-    mysqli_stmt_bind_param($stmt, "i", $ID);
+    $stmt = mysqli_prepare($con, "SELECT * FROM owners WHERE OwnerID = ?");
+    mysqli_stmt_bind_param($stmt, "i", $OwnerID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -34,8 +34,8 @@
         $address = $_POST['address'];
 
         // Update the owner with the new details
-        $stmt = mysqli_prepare($con, "UPDATE owners SET cname=?, phone=?, address=? WHERE ID=?");
-        mysqli_stmt_bind_param($stmt, "sssi", $cname, $phone, $address, $ID);
+        $stmt = mysqli_prepare($con, "UPDATE owners SET cname=?, phone=?, address=? WHERE OwnerID=?");
+        mysqli_stmt_bind_param($stmt, "sssi", $cname, $phone, $address, $OwnerID);
 
         mysqli_stmt_execute($stmt);
 
