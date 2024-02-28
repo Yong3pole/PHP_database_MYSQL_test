@@ -1,19 +1,24 @@
-Table: Owners
+-------------- So FAR WORKING (ISET SA MYSQL DAAN)--------------------
+
+Table: owners
 Fields:
 OwnerID (Primary Key)
-OwnerName
-Phone
-Email
-Address
+cname
+phone
+address
   
 Table: Animals
 Fields:
 AnimalID (Primary Key)
 AnimalName
-AnimalType
+Type
 Age
 OwnerID (Foreign Key referencing Owners.OwnerID)
 
+
+
+
+----------- WALA PA NASET ------------
 Table: Appointments
 Fields:
 AppointmentID (Primary Key)
