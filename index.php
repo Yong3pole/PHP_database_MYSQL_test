@@ -2,19 +2,19 @@
     include 'connect.php'; //connect to database, error when fails
 
     if(isset($_POST['submit'])){
-        $fname=$_POST['fname'];
-        $lname=$_POST['lname'];
-        $major=$_POST['major'];
-        $GPA=$_POST['GPA'];
+        $cname=$_POST['cname'];
+        $phone=$_POST['phone'];
+        $address=$_POST['address'];
+        
 
         // Check if any of the required fields are empty
-        if(empty($fname) || empty($lname) || empty($major) || empty($GPA)){
+        if(empty($cname) || empty($phone) || empty($address)){
             // Display an error message if any of the required fields are empty
             $error_message = "Please fill in all required fields.";
         } else {
             //insert query
-            $sql = "INSERT INTO owners (fname, lname, major, GPA) 
-            VALUES ('$fname', '$lname', '$major', '$GPA')";
+            $sql = "INSERT INTO owners (cname, phone, address) 
+            VALUES ('$cname', '$phone', '$address')";
 
             $result=mysqli_query($con,$sql);
             if(!$result){
@@ -52,24 +52,19 @@
             ?>
         <form method="post">
         <div class="mb-3">
-            <label for="exampleFormControlInput2" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Enter First name" 
-            name="fname" autocomplete="off" style="width: 400px">
+            <label for="exampleFormControlInput2" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Enter Name" 
+            name="cname" autocomplete="off" style="width: 400px">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput3" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Enter Last name" 
-            name="lname" autocomplete="off" style="width: 400px">
+            <label for="exampleFormControlInput3" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Enter Phone" 
+            name="phone" autocomplete="off" style="width: 400px">
         </div>
         <div class="mb-3">
-            <label for="exampleFormControlInput4" class="form-label">major</label>
-            <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter major" 
-            name="major" autocomplete="off" style="width: 400px">
-        </div>
-        <div class="">
-            <label for="exampleFormControlInput5" class="form-label">GPA</label>
-            <input type="text" class="form-control" id="exampleFormControlInput5" placeholder="Enter GPA" 
-            name="GPA" autocomplete="off" style="width: 400px">
+            <label for="exampleFormControlInput4" class="form-label">Address</label>
+            <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter Address" 
+            name="address" autocomplete="off" style="width: 400px">
         </div>
         <button class="btn btn-primary btn-lg my-5" 
         name="submit">Create Record</button>
