@@ -1,3 +1,19 @@
+<?php
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Check if the username and password match the hardcoded values
+    if ($_POST['username'] == 'admin' && $_POST['password'] == '123456789') {
+        // Redirect to index.php
+        header('Location: index.php');
+        exit;
+    } else {
+        // Incorrect username or password
+        echo '<div class="alert alert-danger" role="alert">Incorrect username or password</div>';
+    }
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,8 +38,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
         }
         .my-custom-margin {
-            margin-top: 5rem;
             margin-bottom: 5rem;
+            margin-top: 5rem; /* Add a top margin to the form */
         }
         .custom-label {
             width: 100px; /* Adjust this width as needed */
@@ -33,12 +49,13 @@
         .custom-input {
             width: calc(100% - 100px); /* Subtract the label width from 100% to calculate the input width */
         }
+        
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="col-sm-15 text-center my-5">  Login Page  </h1>
-        <form class="d-flex justify-content-center my-custom-margin">
+        <form class="d-flex justify-content-center my-custom-margin" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         
             <div class="col-sm-8">
                 <div class="row mb-3">
@@ -46,7 +63,7 @@
                         <label for="inputEmail3" class="col-form-label custom-label">Username</label>
                     </div>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control custom-input" id="inputEmail3">
+                        <input type="text" class="form-control custom-input" id="inputEmail3" name="username">
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -54,7 +71,7 @@
                         <label for="inputPassword3" class="col-form-label custom-label">Password</label>
                     </div>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control custom-input" id="inputPassword3">
+                        <input type="password" class="form-control custom-input" id="inputPassword3" name="password">
                     </div>
                 </div>
                 <div class="row mb-3">
