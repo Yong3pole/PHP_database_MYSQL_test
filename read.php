@@ -38,15 +38,14 @@
 <body>
     
     <div class="container my-5">
-        <h2>Students</h2>
+        <h2>Customer Records</h2>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">ID#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">major</th>
-                    <th scope="col">GPA</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -60,16 +59,14 @@
                 while ($row = mysqli_fetch_assoc($result)) {
 
                     $ID = $row['ID'];
-                    $fname = $row['fname'];
-                    $lname = $row['lname'];
-                    $major = $row['major'];
-                    $GPA = $row['GPA'];
+                    $cname = $row['cname'];
+                    $phone = $row['phone'];
+                    $address = $row['address'];
                     echo '<tr>
                     <th scope="row">' . $ID . '</th>
-                    <td>' . $fname . '</td>
-                    <td>' . $lname . '</td>
-                    <td>' . $major . '</td>
-                    <td>' . $GPA . '</td>
+                    <td>' . $cname . '</td>
+                    <td>' . $phone . '</td>
+                    <td>' . $address . '</td>
                     <td>
                     <a href="update.php?updateid='.$ID.'" class="btn btn-primary btn-sm">Update</a>
                     <a href="read.php?deleteid='.$ID.'" class="btn btn-danger btn-sm">Delete</a>
