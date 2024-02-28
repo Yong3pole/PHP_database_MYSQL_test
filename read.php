@@ -19,7 +19,7 @@
     }
 
     if (isset($_POST['read_return'])) {
-        echo '<script>window.location.href = "dashboard.php";</script>';
+        echo '<script>window.location.href = "index.php";</script>';
         exit; // Exit immediately after redirecting to prevent further execution
     }
 ?>
