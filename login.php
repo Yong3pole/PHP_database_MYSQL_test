@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the username and password match the hardcoded values
     if ($_POST['username'] == 'admin' && $_POST['password'] == '123456789') {
         // Redirect to index.php
-        header('Location: index.php');
+        header('Location: dashboard.php?login_success=true');
         exit;
     } else {
         // Incorrect username or password
