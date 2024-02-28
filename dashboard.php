@@ -43,7 +43,7 @@ if (isset($_GET['login_success']) && $_GET['login_success'] == 'true') {
     <div class="row justify-content-center">
       <div class="col-3">
         <div class="d-grid gap-4">
-          <a href="index.php?login_success=true" class="btn btn-primary btn-lg">Create Record</a>
+          <a href="index.php?login_success=true" class="btn btn-primary btn-lg">Clinic Records</a>
           <a href="appointments.php" class="btn btn-primary btn-lg">Create Appointment</a>
         </div>
       </div>
