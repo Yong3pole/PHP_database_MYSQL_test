@@ -1,8 +1,20 @@
 <?php
-    include 'connect.php';
+include 'connect.php';
+if (isset($_GET['add_success'])) {
+    echo '<script>alert("Appointment added!")</script>';
+    echo '<script>window.location.href = "appointments.php";</script>';
+    exit;
+}
+
+$sql = "SELECT appointments.*, owners.cname AS owner_name, animals.AnimalName AS pet_name 
+            FROM appointments 
+            INNER JOIN owners ON appointments.OwnerID = owners.OwnerID 
+            INNER JOIN animals ON appointments.AnimalID = animals.AnimalID";
+$result = mysqli_query($con, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,57 +22,70 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        /* Your custom CSS styles here */
+        .customtext-bold {
+            font-weight: bold;
+        }
+
+        .margin-custom {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
     </style>
+
+
 </head>
+
 <body>
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Appointments</li>
+        </ol>
+    </nav>
     <div class="container">
-        <h1 class="text-center my-5">Create Appointment for Customer</h1>
-        <div class="dropdown w-100">
-            <button class="btn btn-secondary dropdown-toggle my-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Customer ID
+        <h1 class="text-center my-3">CLINIC APPOINTMENTS</h1>
+        <table class="table margin-custom">
+            <thead>
+                <tr>
+                    <th style="width: 350px;">Customer/Owner Name</th>
+                    <th style="width: 250px;">Pet Name</th>
+                    <th style="width: 250px;">Date</th>
+                    <th style="width: 200px;">Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+                    <tr>
+                        <td><?php echo $row['owner_name']; ?></td>
+                        <td><?php echo $row['pet_name']; ?></td>
+                        <td><?php echo $row['Date']; ?></td>
+                        <td><?php echo $row['Reason']; ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="container my-5">
+        <div class="margin-custom">Schedule Appointment for: </div>
+        <div class="dropdown margin-custom my-2">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Customer
             </button>
             <ul class="dropdown-menu">
                 <?php
-                $sql = "SELECT ID FROM owners";
-                $result = mysqli_query($con, $sql);
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $ID = $row['ID'];
-                    echo '<li><a class="dropdown-item" href="http://localhost/create-appointments.php?ID=' . $ID . '">' . $ID . '</a></li>';
-                }
-                ?>
-            </ul>
-        </div>
-        <a href="http://localhost/create-appointments.php" class="btn btn-primary">Create Appointment</a>
-        <div class="container my-5">
-            <p class="text-center fw-bold">CUSTOMER RECORDS</p>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">ID#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Address</th>
-                    </tr>
-                </thead>
-                <?php
+                // select query or READ query
                 $sql = "SELECT * FROM owners";
                 $result = mysqli_query($con, $sql);
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $ID = $row['ID'];
-                    $cname = $row['cname'];
-                    $phone = $row['phone'];
-                    $address = $row['address'];
-                    echo '<tr>
-                            <th scope="row">' . $ID . '</th>
-                            <td>' . $cname . '</td>
-                            <td>' . $phone . '</td>
-                            <td>' . $address . '</td>
-                        </tr>';
+                    echo '<li><a class="dropdown-item" href="addAppointments.php?OwnerID=' . $row['OwnerID'] . '">' . $row['cname'] . '</a></li>';
                 }
                 ?>
-            </table>
+            </ul>
+            <div>
+                <a href="dashboard.php" class="btn btn-dark margin-custom my-5">Go Back</a>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
