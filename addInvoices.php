@@ -1,6 +1,42 @@
 <?php
 include 'connect.php';
+
+if (isset($_POST['create_invoice'])) {
+    // Retrieve form data
+    $AppointmentID = $_POST['AppointmentID'];
+    $ProcedureID = $_POST['ProcedureID'];
+    $InvoiceDate = date('Y-m-d');
+
+    // Get ProcedureCost from procedures table
+    $sql = "SELECT ProcedureCost FROM procedures WHERE ProcedureID = ?";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $ProcedureID);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result);
+    $ProcedureCost = $row['ProcedureCost'];
+    $Status = 0; // false
+    // Generate a random InvoiceID
+    $InvoiceID = rand(10000, 99999);
+
+    // Insert data into invoices table
+    $sql = "INSERT INTO invoices (InvoiceID, AppointmentID, ProcedureID, InvoiceDate, TotalCost, Status) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "iiisdi", $InvoiceID, $AppointmentID, $ProcedureID, $InvoiceDate, $ProcedureCost, $Status);
+    
+    mysqli_stmt_execute($stmt);
+
+
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        $success_message = "Invoice Created";
+        echo '<div class="alert alert-success">' . $success_message . '</div>';
+    } else {
+        echo "Error creating invoice: " . mysqli_error($con);
+    }
+}
+
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -41,45 +77,50 @@ include 'connect.php';
     <div class="container-sm my-5 margin-custom">
         <h1>Create Invoice</h1>
         <!-- Choose Appointment dropdown here -->
-        <div class="customtext-bold"></br></br>Choose Appointment: </div>
-        <select class="form-select my-2" aria-label="Default select example" style="width: 500px;">
-            <option selected>Open this select menu</option>
-            <?php
-            // Replace this query with your actual query to fetch appointments with animal names
-            $sql = "SELECT a.*, o.cname AS owner_name, an.AnimalName AS animal_name 
-            FROM appointments a
-            INNER JOIN owners o ON a.OwnerID = o.OwnerID 
-            INNER JOIN animals an ON a.AnimalID = an.AnimalID";
-            $result = mysqli_query($con, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $optionText = $row['Date'] . " | Pet Name: " . $row['animal_name'] . " | Reason: " . $row['Reason'];
-                echo '<option value="' . $row['appointmentID'] . '">' . $optionText . '</option>';
-            }
-            ?>
-        </select>
+        <form method="post">
+            <!-- Choose Appointment dropdown -->
+            <div class="customtext-bold"></br></br>Choose Appointment: </div>
+            <select class="form-select my-2" name="AppointmentID" aria-label="Default select example" style="width: 500px;">
+                <option selected>Open this select menu</option>
+                <?php
+                // Replace this query with your actual query to fetch appointments with animal names
+                $sql = "SELECT a.*, o.cname AS owner_name, an.AnimalName AS animal_name 
+        FROM appointments a
+        INNER JOIN owners o ON a.OwnerID = o.OwnerID 
+        INNER JOIN animals an ON a.AnimalID = an.AnimalID";
+                $result = mysqli_query($con, $sql);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $optionText = $row['Date'] . " | Pet Name: " . $row['animal_name'] . " | Reason: " . $row['Reason'];
+                    echo '<option value="' . $row['AppointmentID'] . '">' . $optionText . '</option>';
+                }
+                ?>
+            </select>
 
+            <!-- Choose Procedure dropdown -->
+            <div class="customtext-bold">Choose Procedure: </div>
+            <select class="form-select my-2" name="ProcedureID" aria-label="Default select example" style="width: 500px;">
+                <option selected>Open this select menu</option>
+                <?php
+                // Replace this query with your actual query to fetch procedures
+                $sql = "SELECT * FROM procedures";
+                $result = mysqli_query($con, $sql);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $optionText = $row['ProcedureName'] . " - ₱" . $row['ProcedureCost'];
+                    echo '<option value="' . $row['ProcedureID'] . '">' . $optionText . '</option>';
+                }
+                ?>
+            </select>
 
+            <div class="customtext-bold">Invoice Date: </div>
+            <input class="form-control my-2" type="text" name="InvoiceDate" value="<?php echo date('Y-m-d');
+                                                                                    echo " - (YYYY-MM-DD)"; ?>" aria-label="Disabled input example" disabled readonly style="width: 500px;">
 
+            <div class="customtext-bold my-5">
+                <button type="submit" name="create_invoice" class="btn btn-success my-2" style="width: 160px;">Create</button> </br>
+                <a href="invoices.php" class="btn btn-dark my-2" style="width: 160px;">Go Back</a>
+            </div>
+        </form>
 
-        <!-- Choose Procedure dropdown here -->
-        <div class="customtext-bold">Choose Procedure: </div>
-        <select class="form-select my-2" aria-label="Default select example" style="width: 500px;">
-            <option selected>Open this select menu</option>
-            <?php
-            // Replace this query with your actual query to fetch procedures
-            $sql = "SELECT * FROM procedures";
-            $result = mysqli_query($con, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $optionText = $row['ProcedureName'] . " - ₱" . $row['ProcedureCost'];
-                echo '<option value="' . $row['ProcedureID'] . '">' . $optionText . '</option>';
-            }
-            ?>
-        </select>
-
-        <div class="customtext-bold my-5">Other</br>
-            <a href="#" class="btn btn-success my-2" style="width: 160px;">Create</a> </br>
-            <a href="invoices.php" class="btn btn-dark" style="width: 160px;">Go Back</a>
-        </div>
     </div>
 
 
