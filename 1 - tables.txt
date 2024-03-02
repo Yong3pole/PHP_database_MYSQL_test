@@ -25,9 +25,10 @@ Fields:
 AppointmentID (Primary Key)
 AnimalID (Foreign Key referencing animals.AnimalID)
 OwnerID (Foreign Key referencing owners.OwnerID
-AppointmentDate
+Date
 Reason
 
+-------------------- GINA WORK PA --------------------------------
 Table: Procedures
 Fields:
 ProcedureID (Primary Key)
