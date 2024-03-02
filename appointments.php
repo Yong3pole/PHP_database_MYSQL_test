@@ -66,7 +66,7 @@ $result = mysqli_query($con, $sql);
         </table>
     </div>
     <div class="container my-5">
-        <div class="margin-custom">Schedule Appointment for: </div>
+        <div class="margin-custom customtext-bold">Create an appointment for: </div>
         <div class="dropdown margin-custom my-2">
             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Select Customer
@@ -81,9 +81,10 @@ $result = mysqli_query($con, $sql);
                 }
                 ?>
             </ul>
-            <div>
-                <a href="dashboard.php" class="btn btn-dark margin-custom my-5">Go Back</a>
-            </div>
+        </div>
+        <div class="margin-custom customtext-bold my-5">Other</br>
+                <a href="invoices.php" class="btn btn-success margin-custom my-2" style="width: 160px;">View Invoices</a> </br>
+                <a href="dashboard.php" class="btn btn-dark margin-custom" style="width: 160px;">Go Back</a>
         </div>
     </div>
 </body>
