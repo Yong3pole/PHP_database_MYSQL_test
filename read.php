@@ -1,27 +1,27 @@
 <?php
-    include 'connect.php';
+include 'connect.php';
 
-    // Check if OwnerID is set and is valid
-    if (isset($_GET['deleteid'])) {
-        $OwnerID = filter_var($_GET['deleteid'], FILTER_SANITIZE_NUMBER_INT);
+// Check if OwnerID is set and is valid
+if (isset($_GET['deleteid'])) {
+    $OwnerID = filter_var($_GET['deleteid'], FILTER_SANITIZE_NUMBER_INT);
 
-        // Delete the owner with the given OwnerID
-        $stmt = mysqli_prepare($con, "DELETE FROM owners WHERE OwnerID = ?");
-        mysqli_stmt_bind_param($stmt, "i", $OwnerID);
-        mysqli_stmt_execute($stmt);
+    // Delete the owner with the given OwnerID
+    $stmt = mysqli_prepare($con, "DELETE FROM owners WHERE OwnerID = ?");
+    mysqli_stmt_bind_param($stmt, "i", $OwnerID);
+    mysqli_stmt_execute($stmt);
 
-        if (mysqli_stmt_affected_rows($stmt) > 0) {
-            echo '<script>window.location.href = "read.php";</script>';
-            exit;
-        } else {
-            echo "Error deleting record: " . mysqli_error($con);
-        }
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        echo '<script>window.location.href = "read.php";</script>';
+        exit;
+    } else {
+        echo "Error deleting record: " . mysqli_error($con);
     }
+}
 
-    if (isset($_POST['read_return'])) {
-        echo '<script>window.location.href = "index.php";</script>';
-        exit; // Exit immediately after redirecting to prevent further execution
-    }
+if (isset($_POST['read_return'])) {
+    echo '<script>window.location.href = "index.php";</script>';
+    exit; // Exit immediately after redirecting to prevent further execution
+}
 ?>
 
 <!doctype html>
@@ -36,7 +36,13 @@
 </head>
 
 <body>
-    
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Clinic Records</li>
+        </ol>
+    </nav>
+
     <div class="container my-5">
         <h2>Customer Records</h2>
         <table class="table">
@@ -68,9 +74,9 @@
                     <td>' . $phone . '</td>
                     <td>' . $address . '</td>
                     <td>
-                    <a href="animals.php?ownerid='.$OwnerID.'" class="btn btn-success btn-sm">Pet Records</a>
-                    <a href="update.php?updateid='.$OwnerID.'" class="btn btn-primary btn-sm">Update</a>
-                    <a href="read.php?deleteid='.$OwnerID.'" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="animals.php?ownerid=' . $OwnerID . '" class="btn btn-success btn-sm">Pet Records</a>
+                    <a href="update.php?updateid=' . $OwnerID . '" class="btn btn-primary btn-sm">Update</a>
+                    <a href="read.php?deleteid=' . $OwnerID . '" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>';
                 }
