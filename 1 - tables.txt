@@ -1,5 +1,5 @@
 Database name ‘clinic’
-Tables: ‘owners’, ‘animals’
+Tables (SO FAR): ‘owners’, ‘animals’, 'appointments'
 
 
 -------------- So FAR WORKING (ISET SA MYSQL DAAN)--------------------
