@@ -41,5 +41,6 @@ InvoiceID (Primary Key)
 AppointmentID (Foreign Key referencing Appointments.AppointmentID)
 ProcedureID (Foreign Key referencing Procedures.ProcedureID)
 InvoiceDate
+Status
 TotalCost
 
