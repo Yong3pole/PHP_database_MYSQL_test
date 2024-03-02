@@ -48,6 +48,13 @@ if (isset($_GET['login_success']) && $_GET['login_success'] == 'true') {
         </div>
       </div>
     </div>
+    <div class="row justify-content-center my-5">
+      <div class="col-3 my-5">
+        <div class="d-grid gap-4 my-5">
+          <a href="login.php" class="btn btn-danger btn-lg">Logout</a>
+        </div>
+      </div>
+    </div>
   </div>
 
 
