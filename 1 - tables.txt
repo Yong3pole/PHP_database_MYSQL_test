@@ -20,13 +20,11 @@ Age
 OwnerID (Foreign Key referencing Owners.OwnerID)
 
 
-
-
------------ WALA PA NASET ------------
-Table: Appointments
+Table: appointments
 Fields:
 AppointmentID (Primary Key)
-AnimalID (Foreign Key referencing Animals.AnimalID)
+AnimalID (Foreign Key referencing animals.AnimalID)
+OwnerID (Foreign Key referencing owners.OwnerID
 AppointmentDate
 Reason
 
