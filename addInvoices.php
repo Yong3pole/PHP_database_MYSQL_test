@@ -5,7 +5,7 @@ if (isset($_POST['create_invoice'])) {
     // Retrieve form data
     $AppointmentID = $_POST['AppointmentID'];
     $ProcedureID = $_POST['ProcedureID'];
-    $InvoiceDate = date('Y-m-d');
+    $InvoiceDate = $_POST['InvoiceDate'];
 
     // Get ProcedureCost from procedures table
     $sql = "SELECT ProcedureCost FROM procedures WHERE ProcedureID = ?";
@@ -44,7 +44,7 @@ if (isset($_POST['create_invoice'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Add Invoice</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -111,9 +111,10 @@ if (isset($_POST['create_invoice'])) {
                 ?>
             </select>
 
-            <div class="customtext-bold">Invoice Date: </div>
-            <input class="form-control my-2" type="text" name="InvoiceDate" value="<?php echo date('Y-m-d');
-                                                                                    echo " - (YYYY-MM-DD)"; ?>" aria-label="Disabled input example" disabled readonly style="width: 500px;">
+            <div class="form-group">
+    <label for="dateInput">Invoice Date:</label>
+    <input type="date" class="form-control my-2" id="dateInput" name="InvoiceDate" value="<?php echo $InvoiceDate; ?>" required style="max-width: 400px;">
+</div>
 
             <div class="customtext-bold my-5">
                 <button type="submit" name="create_invoice" class="btn btn-success my-2" style="width: 160px;">Create</button> </br>
