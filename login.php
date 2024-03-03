@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background-image: url('https://png2.cleanpng.com/sh/db1fdbaf3e93f8704452bf78946bebf7/L0KzQYm3VcMyN5pngJH0aYP2gLBuTfRwb5RmjJ97ZXzkhLr2jwNpcaEyfNHwY3H3PcPsjPF1cZDzi9pycD3zdcW0VfIyOGpoUasAYkjkRYm1V8QzOmY2Tak6NUK6SIK8U8IyO2g6RuJ3Zx==/kisspng-dogcat-relationship-dogcat-relationship-pet-5b109c995b8a58.742251571527815321375.png');
             background-size: cover;
             background-position: center;
-            height: 100vh; /* Ensures the background image covers the entire viewport */
+            height: 100vh; 
         }
         .container {
             max-width: 800px;
