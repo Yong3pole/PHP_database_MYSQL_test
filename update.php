@@ -36,7 +36,6 @@
         // Update the owner with the new details
         $stmt = mysqli_prepare($con, "UPDATE owners SET cname=?, phone=?, address=? WHERE OwnerID=?");
         mysqli_stmt_bind_param($stmt, "sssi", $cname, $phone, $address, $OwnerID);
-
         mysqli_stmt_execute($stmt);
 
         if (mysqli_stmt_affected_rows($stmt) > 0) {
