@@ -39,7 +39,7 @@ if (isset($_GET['login_success']) && $_GET['login_success'] == 'true') {
 
 <body>
   <div class="container my-5">
-    <h1 class="text-center mb-5">Dashboard</h1>
+    <h1 class="text-center mb-5">PetCare Animal Clinic</h1>
     <div class="row justify-content-center">
       <div class="col-3">
         <div class="d-grid gap-4">
