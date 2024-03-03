@@ -76,7 +76,7 @@ if (isset($_POST['read_return'])) {
                     <td>
                     <a href="animals.php?ownerid=' . $OwnerID . '" class="btn btn-success btn-sm">Pet Records</a>
                     <a href="update.php?updateid=' . $OwnerID . '" class="btn btn-primary btn-sm">Update</a>
-                    <a href="read.php?deleteid=' . $OwnerID . '" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="read.php?deleteid=' . $OwnerID . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure you want to delete this record?\');">Delete</a>
                     </td>
                 </tr>';
                 }
