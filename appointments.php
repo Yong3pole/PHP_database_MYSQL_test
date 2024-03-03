@@ -6,6 +6,21 @@ if (isset($_GET['add_success'])) {
     exit;
 }
 
+if (isset($_GET['delete_id'])) {
+    $delete_id = filter_var($_GET['delete_id'], FILTER_SANITIZE_NUMBER_INT);
+    $stmt = mysqli_prepare($con, "DELETE FROM appointments WHERE AppointmentID = ?");
+    mysqli_stmt_bind_param($stmt, "i", $delete_id);
+    mysqli_stmt_execute($stmt);
+
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        echo '<script>alert("Appointment deleted!")</script>';
+        echo '<script>window.location.href = "appointments.php";</script>';
+        exit;
+    } else {
+        echo '<script>alert("Error deleting appointment!")</script>';
+    }
+}
+
 $sql = "SELECT appointments.*, owners.cname AS owner_name, animals.AnimalName AS pet_name 
             FROM appointments 
             INNER JOIN owners ON appointments.OwnerID = owners.OwnerID 
@@ -31,8 +46,6 @@ $result = mysqli_query($con, $sql);
             margin: 0 auto;
         }
     </style>
-
-
 </head>
 
 <body>
@@ -51,6 +64,7 @@ $result = mysqli_query($con, $sql);
                     <th style="width: 250px;">Pet Name</th>
                     <th style="width: 250px;">Date</th>
                     <th style="width: 200px;">Reason</th>
+                    <th style="width: 50px; text-align: center;">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,6 +74,9 @@ $result = mysqli_query($con, $sql);
                         <td><?php echo $row['pet_name']; ?></td>
                         <td><?php echo $row['Date']; ?></td>
                         <td><?php echo $row['Reason']; ?></td>
+                        <td>
+                            <a href="appointments.php?delete_id=<?php echo $row['AppointmentID']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this appointment?')">Delete</a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -82,7 +99,7 @@ $result = mysqli_query($con, $sql);
                 ?>
             </ul>
         </div>
-        <div class="margin-custom customtext-bold my-5">Other</br>
+        <div class="margin-custom customtext-bold my-5">Other: </br>
                 <a href="invoices.php" class="btn btn-success margin-custom my-2" style="width: 160px;">View Invoices</a> </br>
                 <a href="dashboard.php" class="btn btn-dark margin-custom" style="width: 160px;">Go Back</a>
         </div>
