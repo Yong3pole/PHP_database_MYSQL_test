@@ -6,7 +6,6 @@ if (isset($_POST['submit'])) {
     $phone = $_POST['phone'];
     $address = $_POST['address'];
 
-
     // Check if any of the required fields are empty
     if (empty($cname) || empty($phone) || empty($address)) {
         // Display an error message if any of the required fields are empty
@@ -71,8 +70,8 @@ if (isset($_POST['view_all'])) {
                 <input type="text" class="form-control" id="exampleFormControlInput4" placeholder="Enter Address" name="address" autocomplete="off" style="width: 400px">
             </div>
             <button class="btn btn-primary btn-lg my-5" name="submit">Create Record</button>
-            </br><button class="btn btn-success btn-lg" name="view_all">View All Records</button>
-            <a href="dashboard.php" class="btn btn-dark btn-lg">Exit to Dashboard</a>
+            </br><button class="btn btn-success btn-lg" name="view_all">View All Records</button><br>
+            <a href="dashboard.php" class="btn btn-dark btn-lg my-2">Exit to Dashboard</a>
         </form>
     </div>
 </body>
