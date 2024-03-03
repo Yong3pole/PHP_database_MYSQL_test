@@ -39,19 +39,24 @@ if (isset($_POST['submit'])) {
     $Type = $_POST['Type'];
     $Age = $_POST['Age'];
 
-    // Generate a random integer for AnimalID
-    $AnimalID = mt_rand(10000, 99999);
+    // Validate input fields
+    if (!empty($AnimalName) && !empty($Type) && !empty($Age)) {
+        // Generate a random integer for AnimalID
+        $AnimalID = mt_rand(10000, 99999);
 
-    // Insert the data into the animals table
-    $stmt = mysqli_prepare($con, "INSERT INTO animals (AnimalID, AnimalName, Type, Age, OwnerID) VALUES (?, ?, ?, ?, ?)");
-    mysqli_stmt_bind_param($stmt, "isssi", $AnimalID, $AnimalName, $Type, $Age, $OwnerID);
-    mysqli_stmt_execute($stmt);
+        // Insert the data into the animals table
+        $stmt = mysqli_prepare($con, "INSERT INTO animals (AnimalID, AnimalName, Type, Age, OwnerID) VALUES (?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, "isssi", $AnimalID, $AnimalName, $Type, $Age, $OwnerID);
+        mysqli_stmt_execute($stmt);
 
-    // Check if the data was successfully inserted
-    if (mysqli_stmt_affected_rows($stmt) > 0) {
-        $success_message = "Pet record added successfully!";
+        // Check if the data was successfully inserted
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
+            $success_message = "Pet record added successfully!";
+        } else {
+            $error_message = "Error adding pet record: " . mysqli_error($con);
+        }
     } else {
-        $error_message = "Error adding pet record: " . mysqli_error($con);
+        $error_message = "Please fill in all the fields.";
     }
 }
 
@@ -61,8 +66,6 @@ mysqli_stmt_bind_param($stmt, "i", $OwnerID);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
