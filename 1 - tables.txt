@@ -26,13 +26,13 @@ OwnerID (Foreign Key referencing owners.OwnerID
 Date
 Reason
 
-Table: Procedures
+Table: procedures
 Fields:
 ProcedureID (Primary Key)
 ProcedureName
 ProcedureCost
 
-Table: Invoices
+Table: invoices
 Fields:
 InvoiceID (Primary Key)
 AppointmentID (Foreign Key referencing appointments.AppointmentID)
