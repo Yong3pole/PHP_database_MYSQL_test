@@ -1,4 +1,4 @@
-Database name ‘clinic’
+Database name ‘datababies’
 Tables (SO FAR): ‘owners’, ‘animals’, 'appointments', 'procedures', 'invoices'
 
 ----------------
