@@ -1,8 +1,7 @@
 Database name ‘clinic’
-Tables (SO FAR): ‘owners’, ‘animals’, 'appointments'
+Tables (SO FAR): ‘owners’, ‘animals’, 'appointments', 'procedures', 'invoices'
 
-
--------------- So FAR WORKING (ISET SA MYSQL DAAN)--------------------
+----------------
 
 Table: owners
 Fields:
@@ -17,8 +16,7 @@ AnimalID (Primary Key)
 AnimalName
 Type
 Age
-OwnerID (Foreign Key referencing Owners.OwnerID)
-
+OwnerID (Foreign Key referencing owners.OwnerID)
 
 Table: appointments
 Fields:
@@ -28,7 +26,6 @@ OwnerID (Foreign Key referencing owners.OwnerID
 Date
 Reason
 
--------------------- GINA WORK PA --------------------------------
 Table: Procedures
 Fields:
 ProcedureID (Primary Key)
@@ -38,9 +35,8 @@ ProcedureCost
 Table: Invoices
 Fields:
 InvoiceID (Primary Key)
-AppointmentID (Foreign Key referencing Appointments.AppointmentID)
-ProcedureID (Foreign Key referencing Procedures.ProcedureID)
+AppointmentID (Foreign Key referencing appointments.AppointmentID)
+ProcedureID (Foreign Key referencing procedures.ProcedureID)
 InvoiceDate
 Status
 TotalCost
-
